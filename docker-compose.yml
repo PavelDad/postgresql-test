@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres
+    container_name: my-postgres
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: TestDb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: ./EmployeesApi
+      dockerfile: Dockerfile
+    container_name: employees-api
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=TestDb;Username=admin;Password=admin
+    ports:
+      - "5050:8080" # Локальный порт 5050 -> Порт 80 в контейнере
+    depends_on:
+      - db
+volumes:
+  postgres_data:
