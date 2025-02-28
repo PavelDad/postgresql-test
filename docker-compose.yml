@@ -22,5 +22,6 @@ services:
       - "5050:8080" # Локальный порт 5050 -> Порт 80 в контейнере
     depends_on:
       - db
+      
 volumes:
   postgres_data:

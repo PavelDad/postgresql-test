@@ -11,6 +11,7 @@ namespace EmployeesApi.Data
         }
 
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -20,6 +21,10 @@ namespace EmployeesApi.Data
             modelBuilder.Entity<Employee>()
                 .Property(e => e.Id)
                 .HasDefaultValueSql("uuid_generate_v4()"); // Генерация UUID по умолчанию
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.Id)
+                .HasDefaultValueSql("uuid_generate_v4()");
 
             base.OnModelCreating(modelBuilder);
         }
