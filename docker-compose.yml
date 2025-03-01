@@ -18,8 +18,9 @@ services:
     container_name: employees-api
     environment:
       - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=TestDb;Username=admin;Password=admin
+      - ASPNETCORE_URLS=http://+:5050 # Явно указанный порт внутри контейнера
     ports:
-      - "5050:8080" # Локальный порт 5050 -> Порт 80 в контейнере
+      - "80:5050" # Локальный порт 5050 -> Порт 80 в контейнере
     depends_on:
       - db
       
